@@ -6,7 +6,7 @@
  */
 var YUI_to_Jasmine = {
 
-    VERSION : '0.1.1',
+    VERSION : '0.1.2',
 
     ASSERTIONS : [
         {
@@ -36,7 +36,7 @@ var YUI_to_Jasmine = {
         },
         {
             name : 'fail',
-            pattern : /Y.Assert.fail\(\s*['"]?(.*)['"]?\s*\);/g,
+            pattern : /Y.Assert.fail\(\s*(?:(?:['"](.*)['"])|(.*))\s*\);/g,
             replacement : 'expect(null).toEqual(\'fail: $1\');'
         }
     ],
