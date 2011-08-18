@@ -1,0 +1,16 @@
+
+# YUI Test to Jasmine Converter #
+
+Simple tool to convert [YUI Test](http://yuilibrary.com/yui/docs/test/) Assertions into [Jasmine](http://pivotal.github.com/jasmine/) `expect()` calls.
+
+Use it online: [http://millermedeiros.github.com/YUI_to_Jasmine/](http://millermedeiros.github.com/YUI_to_Jasmine/)
+
+
+## License ##
+
+Released under the [WTFPL](http://sam.zoy.org/wtfpl/).
+
+
+## Irony ##
+
+This tool doesn't have any unit tests, use with care. :P

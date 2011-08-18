@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>YUI Test to Jasmine converter</title>
+        <meta name="description" content="Simple converter to help porting YUI Test to Jasmine BDD tests.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{font-family:sans-serif; font-size:16px; line-height:1.6em; background-color:#fff; color:#555}
+            #wrapper{padding:3em; width:962px; margin:0 auto}
+            h1,h2,h3,h4,h5,h6{color:#333}
+            hr{background-color:#fff; border:1px solid #fff; border-top:1px solid #aaa; clear:both; margin:4em 0}
+            .btn{background-color:#333; color:#fff; padding:5px 10px; display:inline-block; text-decoration:none; margin:1em 0}
+            .btn:hover{background-color:#555}
+            textarea{display:block; width:930px; height:400px; border:16px solid #ddd; background-color:#fff; resize:vertical;}
+            #t_output{border-color:#9DD4BF}
+            .fork{width:150px; height:150px; position:absolute; right:0; top:0}            
+        </style>
+        <script src="YUI_to_jasmine.js"></script>
+        <script>
+            function convert(){
+                var source = document.getElementById('t_input').value;
+                var out = YUI_to_Jasmine.convert(source);
+                document.getElementById('t_output').value = out;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>YUI Test to Jasmine converter</h1>
+            <p>
+                Simple tool to convert <a href="http://yuilibrary.com/yui/docs/test/">YUI Test</a> assertions to <a href="http://pivotal.github.com/jasmine/">Jasmine</a> <code>expect()</code> calls. It doesn't cover all the YUI test assertions but can help you to port your tests faster.
+            </p>
+            <p>
+                <strong>current version:</strong> <span id="cur_version"></span>
+            </p>
+            <hr>
+            <h2>Supported Assertions</h2>
+            <ul id="ul_support"></ul>            
+            <hr>
+            <h2>Converter</h2>
+            <h3 id="input">Input</h3>
+            <textarea id="t_input">
+//Example
+
+Y.Assert.areSame('ipsum', ids[0]);
+Y.Assert.areSame('foo', ids[1], 'second id');
+
+Y.Assert.areEqual(1, bar, 'bar');
+Y.Assert.areEqual(3, foo);
+
+Y.Assert.isTrue(ipsum);
+Y.Assert.isTrue(dolor, 'dolor should be true');
+
+Y.Assert.isUndefined(a);
+Y.Assert.isUndefined(b, 'b undef');
+
+Y.Assert.isDefined(bar);
+Y.Assert.isDefined(foo, 'foo def');
+
+Y.Assert.fail();
+Y.Assert.fail('error message goes here');
+            </textarea>
+            <a class="btn" href="#output" onclick="convert()">convert</a><!-- no rocket science. simple need, simple solution -->
+            <h3 id="output">Output</h3>
+            <textarea id="t_output"></textarea>
+            <hr>
+            <h2>Author</h2>
+            <p><a href="http://blog.millermedeiros.com/">Miller Medeiros</a></p>
+            <hr>
+            <h2>License</h2>
+            <p>Released under the <a href="http://sam.zoy.org/wtfpl/">WTFPL</a>.</p>
+            <a href="http://github.com/millermedeiros/YUI_to_Jasmine" class="fork">
+                <img src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"> 
+			</a>
+        </div>
+        <script>
+            document.getElementById('cur_version').innerHTML = YUI_to_Jasmine.VERSION;
+
+            var tmpl = '<li>Y.Assert.::fn::<\/li>',
+                supported = '', cur, i = 0;
+            while(cur = YUI_to_Jasmine.ASSERTIONS[i++]){
+                supported += tmpl.replace(/::fn::/, cur.name);
+            }
+            document.getElementById('ul_support').innerHTML = supported;
+        </script>
+    </body>
+</html>
